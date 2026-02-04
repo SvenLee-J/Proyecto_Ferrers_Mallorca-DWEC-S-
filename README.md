@@ -241,13 +241,6 @@ Reglas mínimas:
 
 ---
 
-😂 vale vale, **mea culpa total**, ahora sí:
-**mismo estilo MD que el tuyo**, limpio, simple, sin florituras y “guapo” como dices.
-
-Te dejo **SOLO la FASE 3**, escrita **igual que Fase 1 y 2**, para pegarla **tal cual**.
-
----
-
 ## Fase 3. Catálogo público + Comandes
 
 Durante esta fase se hará lo necesario para conseguir: `Catálogo público + Sistema básico de comandes`.
@@ -409,11 +402,6 @@ Estados:
 #### Commits:
 
 `Commit: Fase 3 - Seguridad y control de acceso en comandes.`
-
----
-
-Perfecto 😎 cerramos el círculo.
-Aquí tienes la **FASE 4**, escrita **con el mismo estilo MD “guapo”**, coherente con Fase 1–3 y lista para **copiar/pegar**.
 
 ---
 
