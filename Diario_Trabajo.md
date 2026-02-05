@@ -25,3 +25,13 @@ Y accedemos a la URL: `http://localhost:8080`.
 > Al introducir las credenciales que nos aporta el terminal nos llevara a una pagina con un error `404`, porque no esta mapeado. Eso es bueno quiere decir que todo funiona correctamente.
 
 `Commit: Fase 1 - SetUP Backend/Preparacion del proyecto(Spring-Boot)`.
+
+
+### Configurar conexión a BD.
+
+> En esta fase inicial se utilizara H2, puesto que estaremos haciendo pruebas y es idieal para el desarroyo por su "memoria cache".
+
+Accederemos a `/src/main/java/resorce/application.properties` y le añediremos lo necesario para el desarroyo del proyecto:
+
+`Commit: Fase 1 - SetUP Backend/Configuracion Conexion BD`.
+
