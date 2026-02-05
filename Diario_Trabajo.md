@@ -35,3 +35,13 @@ Accederemos a `/src/main/java/resorce/application.properties` y le añediremos l
 
 `Commit: Fase 1 - SetUP Backend/Configuracion Conexion BD`.
 
+### Estructura Basica de paquetes.
+
+> Se creara la estructura basica de paquetes con los que se trabajaran:
+
+- controller/
+- service/
+- repository/
+- entity/
+
+`Commit: Fase 1 - SetUP Backend/Estructura Base de paquetes`.
