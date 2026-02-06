@@ -60,3 +60,17 @@ Comprovaciones:
 - model/
 
 > No se subiran porque no ahi archivos creados de momento.
+
+---
+
+## Fase 1 - SetUp Frontend.
+
+### Fase 1 - Creacion del proyecto Angular.
+
+Ejecutaremos el siguietne comando:
+
+```bash
+ng new Frontend
+```
+
+`Commit: Fase 1 - SetUp Frontend/Creacion del proyecto`
