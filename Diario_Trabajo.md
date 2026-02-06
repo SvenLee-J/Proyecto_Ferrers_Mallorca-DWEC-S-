@@ -100,3 +100,19 @@ El routing se configurara pensando en la siguiente funcion:
 > Cualquir **/" "** Te llevara al **/home** y se configurara las rutas de los componentes. **Configuracion Simple**.
 
 `Commit: Fase 1 - SetUp Frotend/Configuracion basica del Routing`
+
+---
+
+## Fase 1 - Modelo de datos mínimo.
+
+> Crearemos **src/main/java/.../model/users.java**
+
+En esta parte simplemente se creara el modelo de datos de usuario, el cual tendra:
+
+- id
+- email
+- password
+- nom
+- rol
+
+`Commit: Fase 1 - Modelo de datos minimo(de momento)`
