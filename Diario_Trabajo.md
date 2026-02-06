@@ -74,3 +74,29 @@ ng new Frontend
 ```
 
 `Commit: Fase 1 - SetUp Frontend/Creacion del proyecto`
+
+### Fase 1 - Configuracion de Routing basico ( /login / register /home ).
+
+#### Generaracion de componentes.
+
+Generaremos los componentes con ng:
+
+```bash
+ng generate component login
+ng generate component register
+ng generate component home
+```
+
+Una vez generados los componenetes podremos preparar el routing.
+
+`Commit: Fase 1 - SetUp Frotend/Creacion Componentes basicos`
+
+#### Configuracion Routing.
+
+Configuraremos el archivo: `/src/app/app.routes.ts`.
+
+El routing se configurara pensando en la siguiente funcion:
+
+> Cualquir **/" "** Te llevara al **/home** y se configurara las rutas de los componentes. **Configuracion Simple**.
+
+`Commit: Fase 1 - SetUp Frotend/Configuracion basica del Routing`
