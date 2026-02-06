@@ -49,3 +49,14 @@ Comprovaciones:
 
 
 `Commit: Fase 1 - SetUP Backend/Configuracion Conexion BD`.
+
+### Estructura Basica de paquetes.
+
+> Se creara la estructura basica de paquetes con los que se trabajaran:
+
+- controller/
+- service/
+- repository/
+- model/
+
+> No se subiran porque no ahi archivos creados de momento.
