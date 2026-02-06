@@ -26,22 +26,26 @@ Y accedemos a la URL: `http://localhost:8080`.
 
 `Commit: Fase 1 - SetUP Backend/Preparacion del proyecto(Spring-Boot)`.
 
-
 ### Configurar conexión a BD.
 
 > En esta fase inicial se utilizara H2, puesto que estaremos haciendo pruebas y es idieal para el desarroyo por su "memoria cache".
 
-Accederemos a `/src/main/java/resorce/application.properties` y le añediremos lo necesario para el desarroyo del proyecto:
+Accederemos a `/src/main/java/resorce/application.properties` y le añediremos lo necesario para el desarroyo del proyecto.
+
+Crearemos `/src/main/java/FerrersArtesans/Backend/config/SecurityConfig.java`.  
+> Esta archivo de momento tendra la configuracion de seguridad basica para H2.
+
+Una vez echo comprovaremos si funciona:
+
+```bash
+mvn spring-boot:run
+```
+Y accedemos a la URL: `http://localhost:8080/h2-console`.
+
+Comprovaciones:  
+- Login:
+    - User: as
+    - Password: password
+
 
 `Commit: Fase 1 - SetUP Backend/Configuracion Conexion BD`.
-
-### Estructura Basica de paquetes.
-
-> Se creara la estructura basica de paquetes con los que se trabajaran:
-
-- controller/
-- service/
-- repository/
-- entity/
-
-`Commit: Fase 1 - SetUP Backend/Estructura Base de paquetes`.
