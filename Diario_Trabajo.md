@@ -116,3 +116,61 @@ En esta parte simplemente se creara el modelo de datos de usuario, el cual tendr
 - rol
 
 `Commit: Fase 1 - Modelo de datos minimo(de momento)`
+
+---
+
+# Fase 1 - Autenticación JWT ( Backend ).
+
+
+## UserRepository.java
+
+> Permite el acceso a datos JPA para usar la entidad ***User***.
+
+`Commit: Fase 1 - UserReposotory.java ( Backend )`
+
+Primero se tiene el modelo y el repoitorio puesto que sin estos no se puede comprobar **GET** o **POST**.
+
+## Carpeta Security
+
+La carpeta contendra los siguientes archivos.
+
+- ***JwtTokenUtil.java*** // **Genera** y **valida tokens**.
+- ***JwtAuthenticationFilter.java*** // Intercepta **peticiones** y **extre** el **token** del header.
+- ***CustomUserDetailsService.java*** // Conecta la **BD** con **Spring Security**.
+- ***SecurityConfig.java*** // Activa el uso de JWT y permite definir rutas **publicas / privadas**.
+
+> Esta carpet se encarga de todo lo relacionado con validaciones de **token**.
+
+`Commit: Fase 1 -  Carpeta Security ( Backend )`
+
+## Carpeta DTO
+
+> Sin los DTOs los controladores y servicios no pueden comunicar informacion de manera tipada.
+
+- **RegisterRequest.java** // payloads de entrada. || Datos de entrada para registrar.
+- **LoginRequest.java** // payloads de entrada. || Datos de entrada para login.
+- **JwtResponse.java** // respuestas estándar. || Respuesta del login con **token JWT** + **datos usuario**.
+- **MessageResponse.java** // respuestas estándar. ||Respuestas de éxito/error genéricas.
+- **UpdateUserRequest.java** // operan con datos de usuario extendidos. || Datos para **actualizar perfil** usuario.
+- **UserResponse.java** // operan con datos de usuario extendidos. || Datos de usuario para respuestas **GET**.
+
+`Commit: Fase 1 -  Carpeta DTOs ( Backend )`
+
+## Carpeta Service
+
+> Estas clases usan los repositorios y DTOs.
+
+- **AuthService.java** // Lógica de negocio central del AUTH
+- **UserService.java** // CRUD protegido para usuarios // Solo permite los usuarios autentificados.
+
+`Commit: Fase 1 -  Carpeta Services ( Backend )`
+
+## Carpeta controller
+
+> Conecta los service, DTOs y security, por eso se crea lo ultimo.
+
+- **AuthController.java** // endpoints **públicos** (/auth/register, /auth/login).
+- **UserController.java** // endpoints **protegidos** (/user/perfil, etc.).
+- **ValidationExceptionHandler.java** // **maneja errores** globalmente.
+
+`Commit: Fase 1 -  Carpeta controllers ( Backend )`
