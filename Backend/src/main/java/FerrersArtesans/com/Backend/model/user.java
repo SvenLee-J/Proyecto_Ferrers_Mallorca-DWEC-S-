@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor // Nos evita crear Constructores Vacios.
 @AllArgsConstructor // Genera los constructores automaticamente.
 
-public class user {
+public class User {
    
     @Id // Indica que este atributo es un id.
     // Genera un valor de tipo ID.
