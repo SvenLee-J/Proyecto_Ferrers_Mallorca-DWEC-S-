@@ -75,7 +75,7 @@ public class JwtTokenUtil {
                 .setSubject(subject) // Establece el nombre de usuario del token.
                 .setIssuedAt(new Date(System.currentTimeMillis())) // Establece la fecha de inicio del token.
                 .setExpiration(new Date(System.currentTimeMillis() + expiration * 1000)) // Establece la fecha.
-                .signWith(getSigningKey(), SignatureAlgorithm.HS512) // Firma el token con la clave secreta y el algoritmo de firma.
+                .signWith(getSigningKey()) // Firma el token con la clave secreta y el algoritmo de firma.
                 .compact(); // Compila el token y lo devuelve como cadena de texto.
     }
 
