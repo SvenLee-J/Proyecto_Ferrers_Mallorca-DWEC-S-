@@ -121,7 +121,6 @@ En esta parte simplemente se creara el modelo de datos de usuario, el cual tendr
 
 # Fase 1 - Autenticación JWT ( Backend ).
 
-
 ## UserRepository.java
 
 > Permite el acceso a datos JPA para usar la entidad ***User***.
@@ -174,3 +173,57 @@ La carpeta contendra los siguientes archivos.
 - **ValidationExceptionHandler.java** // **maneja errores** globalmente.
 
 `Commit: Fase 1 -  Carpeta controllers ( Backend )`
+
+# Fase 1 - Autenticación JWT ( Frontend ).
+
+## Componentes auth
+
+- **auth.ts** // maneja JWT + LocalStorage.
+
+> Sin esto, no puedes hacer peticiones de autenticacion al backend. Es la base de toda la autenticacion en Frontend.
+
+Creacion de los componentes:
+
+- ng generate service services/auth
+
+`Commit: Fase 1 -  Componente auth ( Frontend )`
+
+## Components Formularios.
+
+- **login/register** // formularios para registrar y logear.
+
+Creacion de los componentes:
+- ng generate component components/login
+- ng generate component components/register
+
+`Commit: Fase 1 -  Componentes forumularios ( Frontend )`
+
+## Componente Comprovaciones.   
+
+- **home** // Pagina principal.
+- **users** // Pagina donde los admins pueden ver la lista de usuarios.
+
+Creacion: 
+- ng generate component components/home
+- ng generate component components/users
+
+`Commit: Fase 1 -  Componentes home + users ( Frontend )`
+
+## Component guard.
+
+- **auth-guard.ts** // verifica JWT válido antes de cargar home/users. Redirige a login si no hay token.
+
+> Protege todas las rutas privadas.
+
+Creacion:
+- ng generate guard guards/auth
+
+`Commit: Fase 1 -  Componente guard ( Frontend )`
+
+## Componente Interceptor
+
+Creacion:
+
+- ng generate interceptor interceptors/jwt
+
+`Commit: Fase 1 -  Componente interceptror ( Frontend )`
