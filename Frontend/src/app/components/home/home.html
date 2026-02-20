@@ -1,0 +1,40 @@
+<!-- contenedor principal -->
+<div class="home-container">
+  
+  <!-- tarjeta central -->
+  <div class="home-card">
+    
+    <!-- sección bienvenida -->
+    <div class="welcome-section">
+      <h1>¡bienvenido!</h1>
+      
+      <!-- info usuario logueado -->
+      <div *ngIf="userEmail" class="user-info">
+        <p><strong>email:</strong> {{ userEmail }}</p>
+        <p><strong>rol:</strong> 
+          <!-- badge con color por rol -->
+          <span class="role-badge" [class]="userRole === 'admin' ? 'admin' : 'client'">
+            {{ userRole }}
+          </span>
+        </p>
+      </div>
+    </div>
+
+    <!-- sección acciones -->
+    <div class="actions-section">
+      
+      <!-- botón solo para admin -->
+      <button 
+        *ngIf="userRole === 'admin'" 
+        class="btn btn-admin mb-3"
+        (click)="navigateToUsers()">
+        gestión de usuarios
+      </button>
+      
+      <!-- botón logout para todos -->
+      <button class="btn btn-logout" (click)="logout()">
+        cerrar sesión
+      </button>
+    </div>
+  </div>
+</div>
