@@ -10,8 +10,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.crypto.SecretKey;
 
@@ -65,6 +68,13 @@ public class JwtTokenUtil {
     // Genera un token para el usuario.
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
+
+        // Extrae el rol del token jwt.
+        List<String> roles = userDetails.getAuthorities().stream()
+            .map(auth -> auth.getAuthority().replace("ROLE", "")) // Quita el prefijo del token.
+            .collect(Collectors.toList()); // Convierte a lista string
+        claims.put("roles", roles); // Añade roles al jwt
+
         return createToken(claims, userDetails.getUsername());
     }
 
