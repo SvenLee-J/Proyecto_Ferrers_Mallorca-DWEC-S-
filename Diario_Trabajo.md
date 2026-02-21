@@ -282,3 +282,68 @@ public ResponseEntity<List<String>> ferrersOnly() { // Devuelve lista de ferrers
 ```
 
 `Commit: Fase 1 - Nuevo Endpont en UserController.java ( Backend )`
+
+---
+
+# Fase 2 - Ampliacion de modelos + Datos minimos.
+
+En esta fase se añadiran tres modelos nuevos:
+
+- perfiles_ferrers
+- categorias 
+- productos 
+
+## Creacion de los modelos:
+
+- **perfiles_ferrers** // 1:1 con User 
+- **categorias** // 1:N productos
+- **productos** // N:1 categoria
+
+`Commit: Fase 2 - Nuevos modelos ( Backend )`
+
+## Cracion de los repositorios:
+
+- **PerfilFerrerRepository.java**
+- **CategoriaRepository.java**
+- **ProductoRepository.java**
+
+`Commit: Fase 2 - Repositorios de los nuevos Modelos ( Backend )`
+
+---
+
+# Fase 2 - CRUD Nuevos Modelos. ( Backend )
+
+## Creacion Services nuevos modelos.
+
+En esta Parte se creara los service de los nuevos modelos.
+
+- **PerfilFerrerService.java** // Gestiona CRUD completo de categorías
+- **CategoriaService.java** // Administra perfiles de FERRERS
+- **ProductoService.java** // CRUD productos + filtros por categoría/stock para tienda
+
+`Commit: Fase 2 - Services de los nuevos Modelos ( Backend )`
+
+## Modificacion de SecurityConfig,java en filterChain 
+
+Se añadira los siguientes filtros:
+
+```java   
+    .requestMatchers(HttpMethod.GET, "/api/categorias/**").hasAnyRole("CLIENT", "FERRER", "ADMIN") // categorías: todos
+    
+    .requestMatchers(HttpMethod.GET, "/api/productos/**").hasAnyRole("CLIENT", "FERRER", "ADMIN") // productos: todos
+    
+    .requestMatchers(HttpMethod.GET, "/api/ferrers/perfiles/**")hasAnyRole("FERRER", "ADMIN") // perfiles ferrer: herreros + admin
+```
+
+`Commit: Fase 2 - Filtros añadidos en SecurityConfig.java ( Backend )`
+
+## Creacion de los controllers de nuevos modelos.
+
+Se craran los siguientes Controllers:
+
+- **CategoriaController.java**
+- **ProductoController.java**
+- **FerrerController.java**
+
+`Commit: Fase 2 - Controllers de nuevos models ( Backend )`
+
