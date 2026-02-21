@@ -3,6 +3,7 @@ package FerrersArtesans.com.Backend.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -47,8 +48,10 @@ public class SecurityConfig {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))  // Sin sesiones (JWT stateless).
             .authorizeHttpRequests(authz -> authz  // Reglas de acceso.
                 .requestMatchers("/auth/register", "/auth/login", "/h2-console/**" ).permitAll() // Login y register.
+                .requestMatchers(HttpMethod.GET, "/api/users").hasAnyRole("CLIENT", "FERRER", "ADMIN") // Los usuarios solo pueden ser vistos por "todos".
+                .requestMatchers(HttpMethod.GET, "/api/ferrers").hasAnyRole("FERRER", "ADMIN") // Los Herreos Pueden ser vistos por herreros y admin.
                 .anyRequest().authenticated()  // TODO lo demas REQUIERE token JWT.
-                
+
             )
             .headers(headers -> headers
             .frameOptions(frameOptions -> frameOptions.disable())
