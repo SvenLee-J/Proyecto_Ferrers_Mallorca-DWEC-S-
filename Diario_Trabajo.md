@@ -227,3 +227,58 @@ Creacion:
 - ng generate interceptor interceptors/jwt
 
 `Commit: Fase 1 -  Componente interceptror ( Frontend )`
+
+---
+
+# Fase 1 - Seguridad mínima Backend ( Frontend ).
+
+En esta parte se hara lo siguiente:
+
+- Actualizar **SecurityConfig** con **Roles**.
+- Modificar **JwtService** para incluir **Roles**.
+- Añador un **Endpoint** protegido de prueba **FERRER**.
+
+## Actualizar SecurityConfig:
+
+Se añaden estas dos lineas al **filterChain**:
+```java
+.requestMatchers(HttpMethod.GET, "/api/users").hasAnyRole("CLIENT", "FERRER", "ADMIN") // Los usuarios solo pueden ser vistos por "todos".
+
+.requestMatchers(HttpMethod.GET, "/api/ferrers").hasAnyRole("FERRER", "ADMIN") // Los Herreos Pueden ser vistos por herreros y admin.
+```
+
+`Commit: Fase 1 -  Actualizacion Securityconfig Roles ( Backend )`
+
+
+## Modificar JwtTokenUtil.java:
+
+Lo modificamos para incluir el rol del user al generar el token.
+
+Se le ha añadido las siguiente lineas a **generateToken**:
+
+```java
+// Extrae el rol del token jwt.
+List<String> roles = userDetails.getAuthorities().stream()
+    .map(auth -> auth.getAuthority().replace("ROLE", "")) // Quita el prefijo del token.
+
+    .collect(Collectors.toList()); // Convierte a lista string
+    claims.put("roles", roles); // Añade roles al jwt
+```
+
+`Commit: Fase 1 -  Actualizacion JwtTokenUtil Generacion token con rol ( Backend )`
+
+## Endponts protegidos para roles:
+
+Se le añadira un endpoint al que solo podran acceder los herreros o admins.
+
+Se le añadira este Endpoint a **UserController.java**:
+
+```java
+@GetMapping("/ferrers") // GET /api/ferrers
+@PreAuthorize("hasRole('FERRER') or hasRole('ADMIN'") // Solo Ferrers o Admin
+public ResponseEntity<List<String>> ferrersOnly() { // Devuelve lista de ferrers
+    return ResponseEntity.ok(List.of("Ferrer1-Activo", "Ferrer2-Pausa", "Ferrer3-Admin"));
+}
+```
+
+`Commit: Fase 1 - Nuevo Endpont en UserController.java ( Backend )`
