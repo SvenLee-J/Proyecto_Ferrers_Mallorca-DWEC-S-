@@ -23,21 +23,27 @@ public class UserController {
         return ResponseEntity.ok(users);  // 200 OK + lista.
     }
 
-    @GetMapping("/{id}")  // GET /api/users/1
+    @GetMapping("/{id}")  // GET /api/users/
     @PreAuthorize("hasRole('ADMIN') or authentication.principal == #id")  // ADMIN o propio usuario.
     public ResponseEntity<UserResponse> getUserById(@PathVariable Long id) {
         UserResponse user = userService.findById(id);  // Busca usuario por ID.
         return ResponseEntity.ok(user);  // 200 OK + usuario.
     }
 
-    @PutMapping("/{id}")  // PUT /api/users/1
+    @GetMapping("/ferrers") // GET /api/ferrers
+    @PreAuthorize("hasRole('FERRER') or hasRole('ADMIN'") // Solo Ferrers o Admin
+    public ResponseEntity<List<String>> ferrersOnly() { // Devuelve lista de ferrers
+        return ResponseEntity.ok(List.of("Ferrer1-Activo", "Ferrer2-Pausa", "Ferrer3-Admin"));
+    }
+
+    @PutMapping("/{id}")  // PUT /api/users/
     @PreAuthorize("hasRole('ADMIN') or authentication.principal == #id")  // ADMIN o propio usuario.
     public ResponseEntity<UserResponse> updateUser(@PathVariable Long id, @RequestBody UpdateUserRequest updateRequest) {
         UserResponse updatedUser = userService.update(id, updateRequest);  // Actualiza usuario.
         return ResponseEntity.ok(updatedUser);  // 200 OK + usuario actualizado.
     }
 
-    @DeleteMapping("/{id}")  // DELETE /api/users/1
+    @DeleteMapping("/{id}")  // DELETE /api/users/
     @PreAuthorize("hasRole('ADMIN')")  // Solo ADMIN puede borrar.
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.delete(id);  // Borra usuario.
