@@ -46,10 +46,15 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())  // Desactiva CSRF (JWT no necesita cockies).
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))  // Sin sesiones (JWT stateless).
             .authorizeHttpRequests(authz -> authz  // Reglas de acceso.
-                .requestMatchers("/auth/register", "/auth/login").permitAll() // Login y H2 libres.
+                .requestMatchers("/auth/register", "/auth/login", "/h2-console/**" ).permitAll() // Login y register.
                 .anyRequest().authenticated()  // TODO lo demas REQUIERE token JWT.
+                
             )
-            // .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)  // Agrega filtro JWT ANTES del filtro normal.
+            .headers(headers -> headers
+            .frameOptions(frameOptions -> frameOptions.disable())
+            )
+            
+                // .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)  // Agrega filtro JWT ANTES del filtro normal.
             .cors(cors -> cors.configurationSource(corsConfigurationSource()));  // Habilita CORS para Angular.
 
         return http.build();
