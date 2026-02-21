@@ -41,27 +41,27 @@ public class SecurityConfig {
         return config.getAuthenticationManager();  
     }
 
-    @Bean  // Cadena principal de filtros de seguridad.
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            .csrf(csrf -> csrf.disable())  // Desactiva CSRF (JWT no necesita cockies).
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))  // Sin sesiones (JWT stateless).
-            .authorizeHttpRequests(authz -> authz  // Reglas de acceso.
-                .requestMatchers("/auth/register", "/auth/login", "/h2-console/**" ).permitAll() // Login y register.
-                .requestMatchers(HttpMethod.GET, "/api/users").hasAnyRole("CLIENT", "FERRER", "ADMIN") // Los usuarios solo pueden ser vistos por "todos".
-                .requestMatchers(HttpMethod.GET, "/api/ferrers").hasAnyRole("FERRER", "ADMIN") // Los Herreos Pueden ser vistos por herreros y admin.
-                .anyRequest().authenticated()  // TODO lo demas REQUIERE token JWT.
+@Bean // cadena principal de filtros de seguridad
+public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    http
+        .csrf(csrf -> csrf.disable()) // desactiva csrf (jwt no usa cookies)
+        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // sesiones stateless (sin server sessions)
+        .authorizeHttpRequests(authz -> authz // reglas de autorización por endpoint
+            .requestMatchers("/auth/register", "/auth/login", "/h2-console/**").permitAll() // público: registro, login y h2 console
+            .requestMatchers(HttpMethod.GET, "/api/users").hasAnyRole("CLIENT", "FERRER", "ADMIN") // users: todos los roles
+            .requestMatchers(HttpMethod.GET, "/api/ferrers").hasAnyRole("FERRER", "ADMIN") // ferrers: solo herreros + admin
+            .requestMatchers(HttpMethod.GET, "/api/categorias/**").hasAnyRole("CLIENT", "FERRER", "ADMIN") // categorías: todos
+            .requestMatchers(HttpMethod.GET, "/api/productos/**").hasAnyRole("CLIENT", "FERRER", "ADMIN") // productos: todos
+            .requestMatchers(HttpMethod.GET, "/api/ferrers/perfiles/**").hasAnyRole("FERRER", "ADMIN") // perfiles ferrer: herreros + admin
+            .anyRequest().authenticated() // resto endpoints requieren jwt válido
+        )
+        .headers(headers -> headers
+            .frameOptions(frameOptions -> frameOptions.disable()) // permite iframes (h2-console)
+        )
+        .cors(cors -> cors.configurationSource(corsConfigurationSource())); // habilita cors para frontend angular
 
-            )
-            .headers(headers -> headers
-            .frameOptions(frameOptions -> frameOptions.disable())
-            )
-            
-                // .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)  // Agrega filtro JWT ANTES del filtro normal.
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()));  // Habilita CORS para Angular.
-
-        return http.build();
-    }
+    return http.build(); // construye y activa cadena de filtros
+}
 
     @Bean  // Configuracion CORS para frontend.
     public CorsConfigurationSource corsConfigurationSource() {
