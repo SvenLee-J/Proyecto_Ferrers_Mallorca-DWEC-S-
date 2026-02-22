@@ -1,44 +1,46 @@
 <!-- sección register -->
 <div class="register-container">
 
-  <!-- título registro -->
-  <h2>registrarse</h2>
+  <div>
+      <!-- título registro -->
+      <h2>registrarse</h2>
+      
+      <!-- formulario reactivo -->
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        
+        <!-- campo nombre -->
+        <label for="name">nombre</label>
+        <input id="name" type="text" formControlName="name">
+        <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched" class="error">nombre requerido</div>
+        
+        <!-- campo email -->
+        <label for="email">email</label>
+        <input id="email" type="email" formControlName="email">
+        <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="error">email requerido y formato válido</div>
+        
+        <!-- campo password -->
+        <label for="password">contraseña</label>
+        <input id="password" type="password" formControlName="password">
+        <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error">contraseña mínima 6 caracteres</div>
 
-  <!-- formulario reactivo -->
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-
-    <!-- campo nombre -->
-    <label for="name">nombre</label>
-    <input id="name" type="text" formControlName="name">
-    <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched" class="error">nombre requerido</div>
-
-    <!-- campo email -->
-    <label for="email">email</label>
-    <input id="email" type="email" formControlName="email">
-    <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="error">email requerido y formato válido</div>
-
-    <!-- campo password -->
-    <label for="password">contraseña</label>
-    <input id="password" type="password" formControlName="password">
-    <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error">contraseña mínima 6 caracteres</div>
-
-    <!-- campo rol -->
-    <label for="role">rol</label>
-    <select id="role" formControlName="role">
-      <option value="CLIENTE">cliente</option>
-      <option value="FERRER">ferrer</option>
-    </select>
-
-    <!-- mensaje error global -->
-    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
-
-    <!-- botón submit -->
-    <button type="submit" [disabled]="registerForm.invalid || loading">
-      <span *ngIf="loading" class="spinner">cargando...</span>
-      {{ loading ? 'registrando...' : 'registrarse' }}
-    </button>
-  </form>
-
-  <!-- enlace login -->
-  <p>¿ya tienes cuenta? <a routerLink="/login">inicia sesión</a></p>
+        <!-- campo rol -->
+        <label for="role">rol</label>
+        <select id="role" formControlName="role">
+          <option value="CLIENTE">cliente</option>
+        <option value="FERRER">ferrer</option>
+      </select>
+      
+      <!-- mensaje error global -->
+      <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+      
+      <!-- botón submit -->
+      <button type="submit" [disabled]="registerForm.invalid || loading">
+        <span *ngIf="loading" class="spinner">cargando...</span>
+        {{ loading ? 'registrando...' : 'registrarse' }}
+      </button>
+    </form>
+    
+    <!-- enlace login -->
+    <p>¿ya tienes cuenta? <a routerLink="/login">inicia sesión</a></p>
+  </div>
 </div>

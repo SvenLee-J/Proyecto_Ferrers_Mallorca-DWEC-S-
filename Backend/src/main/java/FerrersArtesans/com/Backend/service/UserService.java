@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service  // Registra como servicio de Spring.
@@ -58,5 +59,9 @@ public class UserService {
     private UserResponse mapToUserResponse(User user) {
         // Convierte entidad User a DTO UserResponse.
         return new UserResponse(user.getId(), user.getEmail(), user.getNom(), user.getRol());
+    }
+
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByEmail(username);
     }
 }

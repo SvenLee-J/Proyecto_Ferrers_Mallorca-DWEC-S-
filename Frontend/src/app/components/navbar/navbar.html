@@ -1,0 +1,25 @@
+<nav class="navbar">
+  <!-- Logo/Home SIEMPRE visible -->
+  <a routerLink="/home" class="logo">
+    <h2>Ferrers Felanitx</h2>
+  </a>
+
+  <!-- Links FERRER (SOLO rol FERRER) -->
+  <div class="nav-links" *ngIf="auth.hasRole('FERRER')">
+    <a routerLink="/ferrer/mi-perfil" class="nav-link">Mi Perfil</a>
+    <a routerLink="/ferrer/mis-productos" class="nav-link">Mis Productos</a>
+  </div>
+
+  <!-- Links PÚBLICOS (NO logueado) -->
+  <div class="nav-links" *ngIf="!auth.isLoggedIn()">
+    <a routerLink="/login" class="nav-link">Login</a>
+    <a routerLink="/register" class="nav-link">Registro</a>
+  </div>
+
+  <!-- Usuario LOGUEADO -->
+  <div class="user-section" *ngIf="auth.isLoggedIn()">
+    <span class="user-email">{{ auth.getEmail() }}</span>
+    <span class="user-role">{{ auth.getRole() }}</span>
+    <button (click)="logout()" class="btn-logout">Salir</button>
+  </div>
+</nav>

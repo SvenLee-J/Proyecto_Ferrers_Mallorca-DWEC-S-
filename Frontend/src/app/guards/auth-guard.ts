@@ -1,16 +1,17 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { Auth } from '../services/auth'; 
+import { Auth } from '../services/auth';
 
+// guard para proteger rutas de ferrer
 export const authGuard: CanActivateFn = (route, state) => {
-  const auth = inject(Auth); // Inyecta servicio Auth.
-  const router = inject(Router); // Inyecta Router.
+  const auth = inject(Auth);
+  const router = inject(Router);
 
-  // Si usuario logueado → permite acceso.
-  if (auth.isLoggedIn()) {
+  // verifica autenticación y rol FERRER
+  if (auth.isLoggedIn() && auth.hasRole('FERRER')) {
     return true;
   } else {
-    // Si NO logueado → redirige a login.
-    return router.createUrlTree(['/login']);
+    router.navigate(['/login']);
+    return false;
   }
 };

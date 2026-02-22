@@ -1,17 +1,17 @@
-// sección imports
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home';
 import { LoginComponent } from './components/login/login';
 import { RegisterComponent } from './components/register/register';
+import { authGuard } from './guards/auth-guard';
 
+// configuración principal de rutas
 export const routes: Routes = [
-  // redirige raíz a home
+  // rutas públicas
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  
-  { path: 'home', component: HomeComponent },     // home principal
-  { path: 'login', component: LoginComponent },   // login usuario
-  { path: 'register', component: RegisterComponent }, // registro nuevo usuario
-  
-  // ruta no encontrada → home
+  { path: 'home', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+
+  // ruta por defecto
   { path: '**', redirectTo: '/home' }
 ];

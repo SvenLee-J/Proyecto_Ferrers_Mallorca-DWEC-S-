@@ -1,32 +1,32 @@
-<!-- contenedor principal -->
+<!-- contenedor principal de usuarios -->
 <div class="users-container">
   
-  <!-- header con titulo y boton volver -->
+  <!-- header con título y botón volver -->
   <div class="users-header">
     <h2>gestión de usuarios (admin)</h2>
     <a routerlink="/home" class="btn btn-back">← volver home</a>
   </div>
 
-  <!-- spinner de carga -->
-  <div *ngif="loading" class="loading-spinner">
+  <!-- spinner durante carga -->
+  <div *ngIf="loading" class="loading-spinner">
     <div class="spinner-border text-primary" role="status">
       <span class="visually-hidden">cargando...</span>
     </div>
     <p>cargando usuarios...</p>
   </div>
 
-  <!-- error mensaje -->
-  <div *ngif="error" class="alert alert-danger">
+  <!-- mensaje de error -->
+  <div *ngIf="error" class="alert alert-danger">
     {{ error }}
   </div>
 
-  <!-- estado vacio -->
-  <div *ngif="!loading && !error && users.length === 0" class="empty-state">
+  <!-- estado sin usuarios -->
+  <div *ngIf="!loading && !error && users.length === 0" class="empty-state">
     <p>no hay usuarios registrados</p>
   </div>
 
-  <!-- tabla usuarios -->
-  <div *ngif="!loading && users.length > 0" class="users-table-container">
+  <!-- tabla de usuarios -->
+  <div *ngIf="!loading && users.length > 0" class="users-table-container">
     <table class="table table-striped">
       <thead>
         <tr>
@@ -39,12 +39,12 @@
       </thead>
       <tbody>
         <!-- fila por cada usuario -->
-        <tr *ngfor="let user of users">
+        <tr *ngFor="let user of users">
           <td>{{ user.id }}</td>
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <td>
-            <!-- badge por rol -->
+            <!-- badge según rol -->
             <span class="role-badge" [class]="user.role === 'admin' ? 'admin' : 'client'">
               {{ user.role }}
             </span>

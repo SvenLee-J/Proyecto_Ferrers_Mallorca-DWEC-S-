@@ -2,7 +2,9 @@ import { Component, signal, computed, effect } from '@angular/core';
 import { RouterOutlet, RouterModule, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Auth } from './services/auth';
+import { NavbarComponent } from './components/navbar/navbar';
 
+// componente principal de la aplicación
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -11,23 +13,24 @@ import { Auth } from './services/auth';
     RouterOutlet,
     RouterModule,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    NavbarComponent
   ],
-  templateUrl: './app.html',  // ✅ FIX: app.html → app.component.html
-  styleUrls: ['./app.css']    // ✅ FIX: styleUrl → styleUrls (plural)
+  templateUrl: './app.html',
+  styleUrls: ['./app.css']
 })
 export class AppComponent {
-  // Signals para estado reactivo
+  // título de la aplicación
   protected readonly title = signal('Ferrers Artesans');
   
-  // Estado del usuario desde Auth service
+  // estado del usuario
   userEmail = signal('');
   userRole = signal('');
   isLoggedIn = signal(false);
 
+  // inicializa el efecto reactivo para sincronizar auth
   constructor(private auth: Auth) {
-    // Effect para sincronizar Auth → UI
-    effect(() => {
+    effect(() => { 
       this.userEmail.set(this.auth.getEmail() || '');
       this.userRole.set(this.auth.getRole() || '');
       this.isLoggedIn.set(this.auth.isLoggedIn());

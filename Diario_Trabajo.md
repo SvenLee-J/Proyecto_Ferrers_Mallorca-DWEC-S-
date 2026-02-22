@@ -347,3 +347,32 @@ Se craran los siguientes Controllers:
 
 `Commit: Fase 2 - Controllers de nuevos models ( Backend )`
 
+---
+
+# Fase 2 - CRUD Nuevos Modelos. ( Frontend )
+
+## Componentes de Ferrer
+
+- **ferrer/mi-perfil** // Perfil del Ferrer
+- **ferrer/mis-productos** // Pagina para gestionar
+
+Creacion de componenets:
+
+- ng generate component components/ferrer/mi-perfil
+- ng generate component components/ferrer/mis-productos
+
+`Commit: Fase 2 - Componentes de ferrers ( Frontend )`
+
+## Componentes Service de Ferrer
+
+- **services/ferrers.ts** // Perfil del Ferrer
+- **sercices/categorias.ts** // Pagina para gestionar
+- **sercices/producto.ts** // Pagina para gestionar
+
+Creacion de services:
+
+- ng generate service services/ferrers
+- ng generate service services/categorias
+- ng generate service services/producto
+
+`Commit: Fase 2 - Services de ferrers ( Frontend )`

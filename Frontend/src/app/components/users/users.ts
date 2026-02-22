@@ -1,7 +1,6 @@
 // sección imports
 import { Component, OnInit } from '@angular/core'; // núcleo angular
 import { CommonModule } from '@angular/common'; // directivas ngif y ngfor
-import { HttpClientModule } from '@angular/common/http'; // módulo http para peticiones
 import { Auth } from '../../services/auth'; // servicio de autenticación jwt
 
 // interfaz de usuario
@@ -16,7 +15,7 @@ interface User {
 @Component({
   selector: 'app-users', // selector html del componente
   standalone: true, // componente autónomo
-  imports: [CommonModule, HttpClientModule], // módulos necesarios
+  imports: [CommonModule], // módulos necesarios
   templateUrl: './users.html', // plantilla html asociada
   styleUrls: ['./users.css'] // estilos asociados
 })

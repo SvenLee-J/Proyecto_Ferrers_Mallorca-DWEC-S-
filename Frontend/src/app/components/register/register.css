@@ -1,51 +1,112 @@
-/* sección register - básico centrado */
 .register-container {
-  max-width: 400px;
-  margin: 4rem auto;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 2rem;
-  background: white;
+  background: #fafafa;
 }
 
-input {
+.register-container > div {
+  background: #ffffff;
+  padding: 3rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
   width: 100%;
-  padding: 12px 16px;
+  max-width: 400px;
+}
+
+h2 { 
+  text-align: center; 
+  color: #7c3aed; 
+  margin-bottom: 2rem; 
+  font-size: 1.75rem; 
+}
+
+label { 
+  display: block; 
+  margin-bottom: 0.5rem; 
+  font-weight: 500; 
+  color: #111827; 
+}
+
+input, select {
+  width: 100%;
+  padding: 0.875rem;
+  border: 2px solid #e5e5e5;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
   margin-bottom: 1rem;
-  border: none;
-  border-bottom: 2px solid #666;
-  background: white;
-  color: #333;
-  font-size: 16px;
 }
 
-input:focus {
-  border-bottom-color: #0066cc;
-}
-
-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  color: #333;
-  font-weight: 500;
+input:focus, select:focus { 
+  outline: none; 
+  border-color: #7c3aed; 
+  box-shadow: 0 0 0 3px rgba(124,58,237,0.1); 
 }
 
 .error {
-  color: #d32f2f;
-  font-size: 14px;
-  margin-bottom: 1rem;
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  background: #fef2f2;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border-left: 4px solid #ef4444;
 }
 
-button {
+button[type="submit"] {
   width: 100%;
-  padding: 14px;
-  background: #0066cc;
-  color: white;
+  padding: 1rem;
+  background: #7c3aed;
+  color: #ffffff;
   border: none;
-  border-radius: 4px;
-  font-size: 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  background: #5b21b6;
+}
+
+p {
+  text-align: center;
+  margin: 1rem 0 0 0;
+}
+
+p a {
+  color: #7c3aed;
+  text-decoration: none;
+  font-weight: 500;
 }
 
 .spinner {
-  text-align: center;
-  padding: 2rem;
-  color: #666;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  border-top-color: #ffffff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+  .register-container { padding: 1rem; }
+  .register-container > *:not(:last-child) { 
+    padding: 2rem 1.5rem; 
+    max-width: 100%; 
+  }
+  h2 { font-size: 1.5rem; }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .register-container > *:not(:last-child) { max-width: 450px; }
 }

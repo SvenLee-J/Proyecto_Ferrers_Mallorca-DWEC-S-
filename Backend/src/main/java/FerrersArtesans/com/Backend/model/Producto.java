@@ -7,27 +7,41 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@Entity // marca clase como entidad jpa
-@Table(name = "productos") // nombre tabla en base de datos
-@Data // genera getters y setters automáticamente
-@NoArgsConstructor // constructor vacío requerido por jpa
-@AllArgsConstructor // constructor completo con todos los campos
+// entidad para productos en base de datos
+@Entity
+@Table(name = "productos")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Producto {
     
-    @Id // clave primaria de la tabla
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // autoincremental
+    // clave primaria autoincremental
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 100) // nombre obligatorio máx 100 chars
+    // nombre del producto
+    @Column(nullable = false, length = 100)
     private String nombre;
 
-    @Column(nullable = false, precision = 10, scale = 2) // precio obligatorio 8 enteros 2 decimales
+    // precio con precisión decimal
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal precio;
 
-    @Column(nullable = false) // stock obligatorio
+    // cantidad en stock
+    @Column(nullable = false)
     private Integer stock;
 
-    @ManyToOne(fetch = FetchType.LAZY) // many:1 con categoría (carga perezosa)
-    @JoinColumn(name = "categoria_id", nullable = false) // clave foránea categoría_id obligatoria
+    // email del propietario ferrer
+    @Column(name = "user_email", nullable = false)
+    private String userEmail;
+
+    // estado de disponibilidad
+    @Column(name = "disponible")
+    private Boolean disponible = true;
+
+    // relación con categoría
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
 }

@@ -13,7 +13,7 @@ Durante la primera semana se hará lo siguiente con el fin de tener hecho el `Se
 - **Backend** - Crear proyecto base Sprigng Boot.
 - **Backend** - Configurar conexión a BD.
 - **Backend** - Estructura básica de paquetes ( `controllers, services, repositories, entities`).
-- **Backend** - Dependencias mínimas (`Web, Security, JWT, JPA, Driver BD`.
+- **Backend** - Dependencias mínimas (`Web, Security, JWT, JPA, Driver BD`).
 
 > Se busca que la API se levante sin errores y conecte con la BD.
 

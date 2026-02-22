@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -30,6 +30,9 @@ export interface MessageResponse {
   providedIn: 'root' // Servicio global singleton.
 })
 export class Auth {
+  userRol() {
+    throw new Error('Method not implemented.');
+  }
   private readonly apiUrl = 'http://localhost:8080/auth'; // URL del backend Spring Boot.
 
   constructor(
@@ -75,11 +78,49 @@ export class Auth {
     return !!this.getToken(); // Verifica si hay token (usuario logueado).
   }
 
-  hasRole(role: string): boolean {
+  // MÉTODO 1: Rol desde localStorage (rápido)
+  hasRoleStorage(role: string): boolean {
     return this.getRole() === role; // Verifica rol especifico.
+  }
+
+  // MÉTODO 2: Rol desde JWT payload (preciso)
+  hasRoleJwt(role: string): boolean {
+    const token = this.getToken();
+    if (!token) return false;
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.rol?.includes(role) || payload.role === role || false;
+    } catch {
+      return false;
+    }
+  }
+
+  // Usa JWT para máxima precisión
+  hasRole(role: string): boolean {
+    return this.hasRoleJwt(role);
   }
 
   isAdmin(): boolean {
     return this.hasRole('ADMIN'); // Verifica si es ADMIN.
+  }
+
+  getUserIdFromToken(): number {
+    const token = this.getToken();
+    if (!token) return 0;
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.sub || payload.userId || 0; // o el campo que uses para ID
+    } catch {
+      return 0;
+    }
+  }
+
+  // Headers para peticiones autenticadas
+  getAuthHeaders(): HttpHeaders {
+    const token = this.getToken();
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
   }
 }
